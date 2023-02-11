@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\SiswaImport;
 use App\Models\siswa;
+use App\Models\siswaFix;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -16,7 +17,7 @@ class siswaController extends Controller
 
     public function show()
     {
-        $siswas = siswa::all();
+        $siswas = siswaFix::all();
 
         return view('admin.siswa.read', compact('siswas'));
     }

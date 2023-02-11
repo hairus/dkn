@@ -17,6 +17,6 @@ class sma_smk_lengkap extends Model
 
     public function siswas()
     {
-        return $this->hasMany(siswa::class, 'npsn', 'npsn');
+        return $this->hasMany(dataPokok::class, 'npsn_sekolah', 'npsn');
     }
 }

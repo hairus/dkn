@@ -88,8 +88,10 @@ class dataPokokController extends Controller
 
     public function getData()
     {
-        $model = dataPokok::query()->limit(1000);
+        $model = dataPokok::query();
 
-        return DataTables::of($model)->toJson();
+        return DataTables::of($model)
+            ->addIndexColumn()
+            ->make(true);
     }
 }

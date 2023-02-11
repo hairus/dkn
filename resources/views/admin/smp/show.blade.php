@@ -9,29 +9,43 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($smps as $key => $smp)
-        <tr>
-            <td>{{ $key + 1 }}</td>
-            <td>{{ $smp->nama_smp }}</td>
-            <td>{{ $smp->npsn_smp }}</td>
-            <td>{{ $smp->jenjang }}</td>
-            <td>
-                <span class="badge rounded-pill bg-primary">
-                    <span class="mdi mdi-pencil"></span>
-                </span>
-                <span class="badge rounded-pill bg-danger">
-                    <span class="mdi mdi-delete"></span>
-                </span>
-                <span class="badge rounded-pill bg-warning">
-                    <span class="mdi mdi-domain"></span>
-                </span>
-            </td>
-        </tr>
-        @endforeach
     </tbody>
 </table>
 <script>
     $(document).ready(function() {
-        $('#smps').DataTable();
+        $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('#smps').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url :"{{ route('getDataSmp') }}",
+                type:"get",
+            },
+            lengthMenu: [10, 20, 50, 100, 200, 500, 1000],
+            columns: [
+                {
+                    data: 'DT_RowIndex',
+                    name:'id'
+                },
+                {
+                    data: 'nama_smp',
+                },
+                {
+                    data: 'npsn_smp',
+                },
+                {
+                    data: 'jenjang',
+                },
+                {
+                    data: 'jenjang',
+                },
+            ]
+        });
+    });
     })
 </script>

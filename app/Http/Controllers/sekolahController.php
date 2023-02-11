@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\kab_kota;
 use App\Models\sma_smk_lengkap;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class sekolahController extends Controller
 {
@@ -16,9 +17,7 @@ class sekolahController extends Controller
 
     public function read()
     {
-        $sekolahs = sma_smk_lengkap::with('siswas')->get();
-
-        return view('admin.sekolah.read', compact('sekolahs'));
+        return view('admin.sekolah.read');
     }
 
     public function create()
@@ -65,5 +64,23 @@ class sekolahController extends Controller
             'kab_kota' => $request['kab_kota'],
             'jenjang' => $request['jenjang'],
         ]);
+    }
+
+    public function getDataSekolah()
+    {
+        $model = sma_smk_lengkap::with('siswas');
+
+        // return response()->json($model);
+
+        return DataTables::eloquent($model)
+
+       ->addIndexColumn()
+
+        ->addColumn('siswas', function (sma_smk_lengkap $post) {
+
+            return $post->siswas->count();
+        })
+
+        ->toJson();
     }
 }

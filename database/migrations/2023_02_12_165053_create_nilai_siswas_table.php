@@ -16,13 +16,10 @@ return new class extends Migration
         Schema::create('nilai_siswas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('siswa_id');
-            $table->decimal('smt1')->default(0);
-            $table->decimal('smt2')->default(0);
-            $table->decimal('smt3')->default(0);
-            $table->decimal('smt4')->default(0);
-            $table->decimal('smt5')->default(0);
-            $table->integer('jum_smt')->default(0);
-            $table->foreign('siswa_id')->references('id')->on('siswas')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('npsn_sma');
+            $table->string('npsn_smp');
+            $table->decimal('rerata')->default(0);
+            $table->foreign('siswa_id')->references('id')->on('siswa_fixes')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -1,9 +1,10 @@
 <table class="table" id="siswasTable">
     <thead>
         <tr>
-            <th>id</th>
+            <th>No</th>
             <th>Nama</th>
             <th>Nisn</th>
+            <th>Tingkat</th>
             <th>Npsn</th>
             <th>Sekolah SMA</th>
             <th>Sekolah SMP</th>
@@ -23,16 +24,24 @@
         $('#siswasTable').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "/dp/getData",
-            lengthMenu: [10, 20, 50, 100, 200, 500],
-            columns: [{
-                    data: 'id',
+            ajax: {
+                url :"{{ route('dp.getData') }}",
+                type:"get",
+            },
+            lengthMenu: [10, 20, 50, 100, 200, 500, 1000],
+            columns: [
+                {
+                    data: 'DT_RowIndex',
+                    name:'id'
                 },
                 {
                     data: 'nama'
                 },
                 {
                     data: 'nisn'
+                },
+                {
+                    'data' : 'tingkat'
                 },
                 {
                     data: 'npsn_sekolah'

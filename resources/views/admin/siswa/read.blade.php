@@ -6,6 +6,7 @@
             <th>SISWA</th>
             <th>NAMA SEKOLAH</th>
             <th>TINGKAT</th>
+            <th>Nilai</th>
             <th>#</th>
         </tr>
     </thead>
@@ -17,6 +18,7 @@
                 <td>{{ $siswa->nama }}</td>
                 <td>{{ $siswa->sekolahs->nm_sekolah }}</td>
                 <td>{{ $siswa->tingkat_kelas }}</td>
+                <td>{{ $siswa->nilai->rerata }}</td>
                 <td>
                     <span class="badge rounded-pill bg-primary">
                         <span class="mdi mdi-pencil"></span>

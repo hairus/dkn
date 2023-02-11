@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\mst_smp;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class SmpController extends Controller
 {
@@ -83,5 +84,15 @@ class SmpController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getDataSmp()
+    {
+
+        $model = mst_smp::query();
+
+        return DataTables::of($model)
+            ->addIndexColumn()
+            ->make(true);
     }
 }

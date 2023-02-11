@@ -37,4 +37,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    // public function npsn()
+    // {
+    //     $login = request()->input('npsn');
+    //     $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'npsn';
+    //     request()->merge([$field => $login]);
+    //     return $field;
+    // }
 }
