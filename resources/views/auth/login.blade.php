@@ -9,7 +9,7 @@
     <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template">
     <meta name="description" content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
-    <title>Matrix Admin Lite Free Versions Template by WrapPixel</title>
+    <title>DKN</title>
     <!-- Favicon icon -->
    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/temp/assets/images/favicon.png')}}">
     <!-- Custom CSS -->
@@ -54,7 +54,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-success text-white h-100" id="basic-addon1"><i class="ti-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control form-control-lg" placeholder="email" aria-label="Username" aria-describedby="basic-addon1" name="npsn" required="">
+                                    <input type="text" class="form-control form-control-lg" placeholder="NPSN`" aria-label="npsn" aria-describedby="basic-addon1" name="npsn" required="">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
@@ -68,8 +68,8 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <div class="pt-3">
-                                        <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock me-1"></i> Lost password?</button>
-                                        <button class="btn btn-success float-end text-white" type="submit">Login</button>
+                                        {{-- <button class="btn btn-info" id="to-recover" type="button"><i class="fa fa-lock me-1"></i> Lost password?</button> --}}
+                                        <button class="btn btn-success float-end text-white mb-3" type="submit">Login</button>
                                     </div>
                                 </div>
                             </div>

@@ -43,6 +43,40 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                            href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-all-inclusive"></i><span
+                                class="hide-menu">Management </span></a>
+                        <ul aria-expanded="false" class="collapse  first-level">
+                            {{-- <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/admin/genUsers') }}" aria-expanded="false">
+                                    <i class="mdi mdi-math-compass"></i>
+                                    <span class="hide-menu">Generate User</span>
+                                </a>
+                            </li> --}}
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/admin/showUser') }}" aria-expanded="false">
+                                    <i class="mdi mdi-magnify-minus"></i>
+                                    <span class="hide-menu">Show UserName</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/admin/dp') }}" aria-expanded="false">
+                                    <i class="mdi mdi-account"></i>
+                                    <span class="hide-menu">Siswa Tidak Fix</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/admin/siswas') }}" aria-expanded="false">
+                                    <i class="mdi mdi-account"></i>
+                                    <span class="hide-menu">Siswa Fix</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 @else
                     <li class="{{ request()->is('/home') ? 'sidebar-item selected' : 'sidebar-item' }}"> <a
                             class="sidebar-link waves-effect waves-dark sidebar-link" href="/home"
@@ -57,6 +91,20 @@
                                     href="{{ url('/op/siswas') }}" aria-expanded="false">
                                     <i class="mdi mdi-account"></i>
                                     <span class="hide-menu">Master Siswa</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/op/siswaNilai') }}" aria-expanded="false">
+                                    <i class="mdi mdi-account-check"></i>
+                                    <span class="hide-menu">Show Nilai</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/op/changePass') }}" aria-expanded="false">
+                                    <i class="mdi mdi-key"></i>
+                                    <span class="hide-menu">Ubah Password</span>
                                 </a>
                             </li>
                         </ul>

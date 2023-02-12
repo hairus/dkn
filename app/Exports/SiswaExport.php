@@ -15,7 +15,7 @@ class SiswaExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        return dataPokok::where('npsn_sekolah', Auth::user()->npsn)->get();
+        return dataPokok::where('npsn_sekolah', Auth::user()->npsn)->orderBy('tingkat', 'ASC')->orderBy('rombel', 'ASC')->orderBy('nama', 'ASC')->get();
     }
 
     public function map($row): array
@@ -26,12 +26,13 @@ class SiswaExport implements FromCollection, WithHeadings, WithMapping
             $row->npsn_sekolah, // attendance id // attendance status
             $row->nisn, // attendance belongs to user
             $row->tingkat, // attendance belongs to user
+            $row->rombel, // attendance belongs to user
             $row->asal_sekolah, // attendance belongs to usser
         ];
     }
 
     public function headings(): array
     {
-        return ["nama", "npsn_sekolah", 'nisn', 'tingkat', 'asal_sekolah', 'npsn_smp','rerata nilai'];
+        return ["nama", "npsn_sekolah", 'nisn', 'tingkat','rombel', 'asal_sekolah', 'npsn_smp','rerata nilai'];
     }
 }

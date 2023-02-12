@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\adminController;
 use App\Http\Controllers\dataPokok;
 use App\Http\Controllers\dataPokokController;
 use App\Http\Controllers\HomeController;
@@ -48,6 +49,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('/json', [SmpController::class, 'getDataSmp'])->name('getDataSmp');
     Route::resource('dp', dataPokokController::class);
     Route::get('/json/getData', [dataPokokController::class, 'getData'])->name('dp.getData');
+
+
+    //management user
+    Route::get("/genUsers",[adminController::class, 'genUsers']);
+    Route::get("/showUser",[adminController::class, 'getuser']);
+
 });
 
 //role operator
@@ -56,5 +63,10 @@ Route::group(['prefix' => 'op', 'middleware' => ['auth', 'operator']], function(
     Route::get('export', [opSiswaController::class, 'export']);
     Route::get('export/smp', [opSiswaController::class, 'exportsmp']);
     Route::get('getSiswa', [opApiController::class, 'getSiswa']);
+    Route::get('siswa/import', [opSiswaController::class, 'import']);
+    Route::post('siswa/saveImport', [opSiswaController::class, 'saveImport']);
+    Route::get('siswaNilai', [opSiswaController::class, 'siswaNilai']);
+    Route::get('changePass', [opSiswaController::class, 'changePass']);
+    Route::post('updatePassword', [opSiswaController::class, 'updatePassword']);
 });
 
