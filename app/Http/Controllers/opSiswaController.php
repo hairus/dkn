@@ -87,8 +87,5 @@ class opSiswaController extends Controller
         $siswas = dataPokok::find($request->id);
         $siswas->nisn = $request->nisn;
         $siswas->save();
-
-        // 0072296387
-        // 0072416782
     }
 }
