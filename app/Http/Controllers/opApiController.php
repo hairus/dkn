@@ -24,7 +24,10 @@ class opApiController extends Controller
 
             return DataTables::eloquent($model)
                 ->addIndexColumn()
-                ->make(true);
+                ->addColumn('action', function($query){
+                    return '<button class="btn btn-primary btn-sm" onclick="edit('.$query->id.')">Edit</button>';
+                })
+                ->toJson();
         } else {
             $model = dataPokok::where(function ($query) use ($sma) {
                 $query->where('npsn_sekolah', $sma->npsn);
@@ -32,7 +35,10 @@ class opApiController extends Controller
 
             return DataTables::eloquent($model)
                 ->addIndexColumn()
-                ->make(true);
+                ->addColumn('action', function($query){
+                    return '<button class="btn btn-primary btn-sm" onclick="edit('.$query->id.')">Edit</button>';
+                })
+                ->toJson();
         }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\SiswaExport;
 use App\Exports\SmpExport;
 use App\Imports\SiswaImport;
+use App\Models\dataPokok;
 use App\Models\kab_kota;
 use App\Models\mst_smp;
 use App\Models\nilai_siswa;
@@ -72,5 +73,22 @@ class opSiswaController extends Controller
         ]);
 
         return back()->with('success', 'password sudah di rubah');
+    }
+
+    public function getsiswa($id)
+    {
+        $data_pokok = dataPokok::find($id);
+
+        return view('operator.siswa.siswaedit', compact('data_pokok'));
+    }
+
+    public function storenisn(Request $request)
+    {
+        $siswas = dataPokok::find($request->id);
+        $siswas->nisn = $request->nisn;
+        $siswas->save();
+
+        // 0072296387
+        // 0072416782
     }
 }

@@ -68,5 +68,6 @@ Route::group(['prefix' => 'op', 'middleware' => ['auth', 'operator']], function(
     Route::get('siswaNilai', [opSiswaController::class, 'siswaNilai']);
     Route::get('changePass', [opSiswaController::class, 'changePass']);
     Route::post('updatePassword', [opSiswaController::class, 'updatePassword']);
+    Route::get('siswa/edit/{id}', [opSiswaController::class, 'getsiswa']);
+    Route::post('siswa/storenisn', [opSiswaController::class, 'storenisn']);
 });
-

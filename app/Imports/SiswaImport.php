@@ -55,7 +55,7 @@ class SiswaImport implements ToCollection
 
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                    return back();
+                    return back()->with('message', 'nisn siswa ada yang kosong');;
                 }
 
 

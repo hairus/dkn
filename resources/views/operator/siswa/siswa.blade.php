@@ -29,6 +29,7 @@
                                 <th>Nisn</th>
                                 <th>Tingkat</th>
                                 <th>Rombel</th>
+                                <th>action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,12 +38,35 @@
                 </div>
             </div>
         </div>
+        {{-- modal --}}
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="page"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="store()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable({
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var table = $('#myTable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
@@ -75,9 +99,44 @@
                         data: 'rombel',
                         name: 'rombel'
                     },
+                    {
+                        data: 'action',
+                    },
 
                 ]
             });
         });
+
+        function edit(id) {
+            $.ajax({
+                type: 'get',
+                url: "/op/siswa/edit/" + id,
+                success: function(data) {
+                    $('#exampleModal').modal('show');
+                    $('#page').html(data)
+                }
+            });
+        }
+
+        function store() {
+            var id = $('#id').val();
+            var nisn = $('#nisn').val();
+            $.ajax({
+                type: 'post',
+                url: "{{ url('/op/siswa/storenisn') }}",
+                data: {
+                    id: id,
+                    nisn: nisn,
+                },
+                success: function(data) {
+                    batal()
+                    $('#myTable').DataTable().ajax.reload();
+                }
+            });
+        }
+
+        function batal() {
+            $('#exampleModal').modal('hide');
+        }
     </script>
 @endsection

@@ -7,6 +7,7 @@ use App\Models\kab_kota;
 use App\Models\siswa;
 use App\Models\siswaFix;
 use App\Models\sma_smk_lengkap;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
