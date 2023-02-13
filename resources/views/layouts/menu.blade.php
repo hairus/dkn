@@ -97,7 +97,7 @@
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="{{ url('/op/siswaNilai') }}" aria-expanded="false">
                                     <i class="mdi mdi-account-check"></i>
-                                    <span class="hide-menu">Show Nilai</span>
+                                    <span class="hide-menu">Nilai</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">

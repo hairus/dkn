@@ -23,7 +23,6 @@ class SiswaExport implements FromCollection, WithHeadings, WithMapping
 
         return [
             $row->nama, // attendance id // attendance status
-            $row->npsn_sekolah, // attendance id // attendance status
             $row->nisn, // attendance belongs to user
             $row->tingkat, // attendance belongs to user
             $row->rombel, // attendance belongs to user
@@ -33,6 +32,6 @@ class SiswaExport implements FromCollection, WithHeadings, WithMapping
 
     public function headings(): array
     {
-        return ["nama", "npsn_sekolah", 'nisn', 'tingkat','rombel', 'asal_sekolah', 'npsn_smp','rerata nilai'];
+        return ["nama", 'nisn', 'tingkat','rombel', 'asal_sekolah', 'npsn_smp','rerata nilai'];
     }
 }

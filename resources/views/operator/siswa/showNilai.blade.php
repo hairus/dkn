@@ -23,7 +23,7 @@
                     <hr class="mb-4">
                     <a href="/op/siswa/import">
                         <button type="button" class="btn btn-sm btn-success text-white float-end mb-3 ms-2">
-                            <span class="fa fa-file"></span> Import Nilai
+                            <span class="fa fa-file"></span> Upload Nilai
                         </button>
                     </a>
                     <a href="{{ url('/op/export') }}">
@@ -33,7 +33,7 @@
                     </a>
                     <a href="{{ url('/op/export/smp') }}">
                         <button type="button" class="btn btn-sm btn-default float-end mb-3 ms-2">
-                            <span class="fa fa-file"> </span> Download Master SMP
+                            <span class="fa fa-file"> </span> Download NPSN SMP
                         </button>
                     </a>
                     <table class="table table-hover" id="myTable">

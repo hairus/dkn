@@ -43,7 +43,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">EDIT NISN</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -121,12 +121,14 @@
         function store() {
             var id = $('#id').val();
             var nisn = $('#nisn').val();
+            var rombel = $('#rombel').val();
             $.ajax({
                 type: 'post',
                 url: "{{ url('/op/siswa/storenisn') }}",
                 data: {
                     id: id,
                     nisn: nisn,
+                    rombel:rombel
                 },
                 success: function(data) {
                     batal()
