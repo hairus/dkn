@@ -37,12 +37,12 @@ class SiswaImport implements ToCollection
 
                     'npsn_sma' => auth()->user()->npsn,
 
-                    'nisn' => $row[2]
+                    'nisn' => $row[1]
 
                 ])->count();
 
                 //jika nilai di atas seratus
-                if($row[7] > 100 || $row[7] < 0){
+                if($row[6] > 100 || $row[6] < 0){
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
                     return back()->with('message', 'rentang nilai salah');
@@ -51,7 +51,7 @@ class SiswaImport implements ToCollection
                 //jika nisn excel kosong
                 // delete data
 
-                if ($row[2] == '' || $row[2] == null) {
+                if ($row[1] == '' || $row[1] == null) {
 
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
@@ -64,7 +64,7 @@ class SiswaImport implements ToCollection
                     $datas = siswaFix::where([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'nisn' => $row[2]
+                        'nisn' => $row[1]
 
                     ])->delete();
 
@@ -76,20 +76,20 @@ class SiswaImport implements ToCollection
 
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'nisn' => $row[2],
+                        'nisn' => $row[1],
 
-                        'tingkat' => $row[3],
+                        'tingkat' => $row[2],
 
-                        'npsn_smp' => $row[6],
+                        'npsn_smp' => $row[5],
 
-                        'rombel' => $row[4],
+                        'rombel' => $row[3],
 
                     ])->nilai()->create([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'npsn_smp' => $row[6],
+                        'npsn_smp' => $row[5],
 
-                        'rerata' => $row[7],
+                        'rerata' => $row[6],
                     ]);
                 } else {
 
@@ -100,20 +100,20 @@ class SiswaImport implements ToCollection
 
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'nisn' => $row[2],
+                        'nisn' => $row[1],
 
-                        'tingkat' => $row[3],
+                        'tingkat' => $row[2],
 
-                        'npsn_smp' => $row[6],
+                        'npsn_smp' => $row[5],
 
-                        'rombel' => $row[4],
+                        'rombel' => $row[3],
 
                     ])->nilai()->create([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'npsn_smp' => $row[6],
+                        'npsn_smp' => $row[5],
 
-                        'rerata' => $row[7],
+                        'rerata' => $row[6],
                     ]);
                 }
             } else {

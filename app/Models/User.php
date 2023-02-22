@@ -22,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'npsn',
-        'password_real'
+        'password_real',
+        'edit_status'
     ];
 
     /**
@@ -47,5 +48,20 @@ class User extends Authenticatable
     public function roles()
     {
         return $this->hasOne(role_user::class, 'user_id', 'id');
+    }
+
+    public function sma()
+    {
+        return $this->belongsTo(sma_smk_lengkap::class, 'npsn', 'npsn');
+    }
+
+    public function fds()
+    {
+        return $this->hasOne(final_siswa::class, 'user_id');
+    }
+
+    public function fns()
+    {
+        return $this->hasOne(final_nilai::class, 'user_id');
     }
 }

@@ -6,20 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template">
-    <meta name="description" content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="description" content="aplikasi penilaian sekolah asal">
     <meta name="robots" content="noindex,nofollow">
-    <title>DKN</title>
+    <title>ANISAJATIM</title>
     <!-- Favicon icon -->
-   <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('/temp/assets/images/favicon.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('temp/assets/images/logo_provinsi.png') }}" >
     <!-- Custom CSS -->
     <link href="{{ asset('/temp/dist/css/style.min.css')}}" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-<![endif]-->
+
 </head>
 
 <body>
@@ -43,7 +37,10 @@
             <div class="auth-box bg-dark border-top border-secondary">
                 <div id="loginform">
                     <div class="text-center pt-3 pb-3">
-                        <span class="db"><img src="{{ asset('/temp/assets/images/logo.png')}}" alt="logo" /></span>
+                        <span class="db"><img src="{{ asset('/temp/assets/images/logo_provinsi.png')}}" alt="logo" style="width:180px;height:272px"/></span>
+                        <h1 class="mt-3 text-white" style="font-family: arial">ANISAJATIM</h1>
+                        <h2 class="mt-3 text-white" style="font-family: arial">Aplikasi Nilai Sekolah Asal</h2>
+                        <h1 class="mt-3 text-white" style="font-family: arial">TIKP DISDIK JATIM</h1>
                     </div>
                     <!-- Form -->
                     <form class="form-horizontal mt-3" id="loginform"  action="{{ route('login') }}" method="post">

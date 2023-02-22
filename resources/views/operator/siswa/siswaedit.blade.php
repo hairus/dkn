@@ -5,9 +5,9 @@
 </div>
 <div class="form-gorup mb-2">
     <label for="">Nisn</label>
-    <input type="text" name="nisn" id="nisn" value="{{ $data_pokok->nisn }}" class="form-control">
+    <input type="text" name="nisn" id="nisna" value="{{ $data_pokok->nisn }}" class="form-control">
 </div>
 <div class="form-gorup">
     <label for="">Rombel</label>
-    <input type="text" name="rombel" id="rombel" value="{{ $data_pokok->rombel }}" class="form-control">
+    <input type="text" name="rombel" id="rombela" value="{{ $data_pokok->rombel }}" class="form-control">
 </div>

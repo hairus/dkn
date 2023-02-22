@@ -63,9 +63,9 @@
                             </li>
                             <li class="sidebar-item">
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link"
-                                    href="{{ url('/admin/dp') }}" aria-expanded="false">
+                                    href="{{ url('/admin/unlock') }}" aria-expanded="false">
                                     <i class="mdi mdi-account"></i>
-                                    <span class="hide-menu">Siswa Tidak Fix</span>
+                                    <span class="hide-menu">Unlock</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -98,6 +98,13 @@
                                     href="{{ url('/op/siswaNilai') }}" aria-expanded="false">
                                     <i class="mdi mdi-account-check"></i>
                                     <span class="hide-menu">Nilai</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/op/finalisasi') }}" aria-expanded="false">
+                                    <i class="mdi mdi-account-check"></i>
+                                    <span class="hide-menu">Finalisasi</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">

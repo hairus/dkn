@@ -7,7 +7,9 @@
             <!-- ============================================================== -->
             <a class="navbar-brand" href="{{ url('/home') }}">
                 <!-- Logo icon -->
-                <b class="logo-icon ps-2">
+                <img src="{{ asset('/temp/assets/images/logo_provinsi.png')}}" alt="homepage" class="light-logo" style="width:20px;height:30px" />
+                <span class="text-white" style="font-family: arial">&emsp;ANISAJATIM</span>
+                {{-- <b class="logo-icon ps-2">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
                     <!-- Dark Logo icon -->
                     <img src="{{ asset('/temp/assets/images/logo-icon.png')}}" alt="homepage" class="light-logo" />
@@ -19,7 +21,7 @@
                     <!-- dark Logo text -->
                     <img src="{{ asset('/temp/assets/images/logo-text.png')}}" alt="homepage" class="light-logo" />
 
-                </span>
+                </span> --}}
                 <!-- Logo icon -->
                 <!-- <b class="logo-icon"> -->
                 <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->

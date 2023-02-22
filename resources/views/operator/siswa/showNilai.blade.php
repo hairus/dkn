@@ -21,30 +21,40 @@
                         {{ $sma->nm_sekolah }}
                     </div>
                     <hr class="mb-4">
-                    <a href="/op/siswa/import">
-                        <button type="button" class="btn btn-sm btn-success text-white float-end mb-3 ms-2">
-                            <span class="fa fa-file"></span> Upload Nilai
-                        </button>
-                    </a>
-                    <a href="{{ url('/op/export') }}">
-                        <button type="button" class="btn btn-sm btn-primary float-end mb-3 ms-2">
-                            <span class="fa fa-file"></span> Download Tempate
-                        </button>
-                    </a>
-                    <a href="{{ url('/op/export/smp') }}">
-                        <button type="button" class="btn btn-sm btn-default float-end mb-3 ms-2">
-                            <span class="fa fa-file"> </span> Download NPSN SMP
-                        </button>
-                    </a>
+                    @if (Auth::user()->fns->final == false)
+                        <a href="/op/siswa/import">
+                            <button type="button" class="btn btn-sm btn-success text-white float-end mb-3 ms-2">
+                                <span class="fa fa-file"></span> Upload Nilai
+                            </button>
+                        </a>
+                        <a href="{{ url('/op/export') }}">
+                            <button type="button" class="btn btn-sm btn-primary float-end mb-3 ms-2">
+                                <span class="fa fa-file"></span> Download Tempate
+                            </button>
+                        </a>
+                        <a href="{{ url('/op/export/smp') }}">
+                            <button type="button" class="btn btn-sm btn-default float-end mb-3 ms-2">
+                                <span class="fa fa-file"> </span> Download NPSN SMP
+                            </button>
+                        </a>
+                        <a href="/op/siswa/delSis" id="hap">
+                            <button type="button" onclick="hapusSiswa()"
+                                class="btn btn-sm btn-danger text-white float-end mb-3 ms-2">
+                                <span class="fa fa-file"></span> Hapus Semua Nilai
+                            </button>
+                        </a>
+                    @endif
                     <table class="table table-hover" id="myTable">
                         <thead>
                             <tr>
-                                <th>id</th>
-                                <th>Nama</th>
-                                <th>Nisn</th>
-                                <th>Nilai</th>
-                                <th>npsn</th>
-                                <th>npsn smp</th>
+                                <th>ID</th>
+                                <th>NAMA</th>
+                                <th>NISN</th>
+                                <th>TINGKAT</th>
+                                <th>ROMBEL</th>
+                                <th>NILAI</th>
+                                <th>NPSN SMP</th>
+                                <th>SMP ASAL</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,13 +63,29 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $data->siswas->nama }}</td>
                                     <td>{{ $data->siswas->nisn }}</td>
+                                    <td>{{ $data->siswas->tingkat }}</td>
+                                    <td>{{ $data->siswas->rombel }}</td>
                                     <td>{{ $data->rerata }}</td>
-                                    <td>{{ $data->smas->nm_sekolah }}</td>
                                     <td>
                                         @if ($data->npsn_smp)
-                                            {{ $data->smps->nama_smp }}
+                                            @if ($data->smps)
+                                                {{ $data->smps->npsn_smp }}
+                                            @else
+                                                {{ $data->npsn_smp }}
+                                            @endif
                                         @else
                                             <span class="badge bg-pill bg-danger"> SMP TIDAK DI TEMUKAN</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($data->npsn_smp)
+                                            @if ($data->smps)
+                                                {{ $data->smps->nama_smp }}
+                                            @else
+                                                <span class="badge bg-pill bg-danger">TIDAK ADA DALAM DATABASE</span>
+                                            @endif
+                                        @else
+                                            <span class="badge bg-pill bg-danger">TIDAK ADA DALAM DATABASE</span>
                                         @endif
                                     </td>
                                 </tr>
@@ -74,7 +100,44 @@
 @section('script')
     <script>
         $(document).ready(function() {
-            $('#myTable').DataTable();
+            $('#myTable').DataTable({
+                // "order": [
+                //     [0, "ASC"],
+                //     [1, "ASC"]
+                // ],
+            });
         });
+
+        function hapusSiswa() {
+            $('#hap').on('click', function(e) {
+                e.preventDefault();
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: 'get',
+                            url: "/op/siswa/delSis",
+                            success: function() {
+                                Swal.fire(
+                                    'Deleted!',
+                                    'Your students has been deleted.',
+                                    'success'
+                                )
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 2000);
+                            }
+                        })
+                    }
+                })
+            })
+        }
     </script>
 @endsection

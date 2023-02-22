@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\ApiAdminController;
 use App\Http\Controllers\dataPokok;
 use App\Http\Controllers\dataPokokController;
 use App\Http\Controllers\HomeController;
@@ -36,7 +37,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('allSekolah', [sekolahController::class, 'index']);
     Route::get('allSekolah/create', [sekolahController::class, 'create']);
-    Route::get('allSekolah/read', [sekolahController::class, 'read']);
+    Route::get('allSekolah/read', [sekolahController::class, 'read'])->name('admin.read');
     Route::get('getDataSekolah', [sekolahController::class, 'getDataSekolah'])->name('getDataSekolah');
     Route::post('allSekolah/store', [sekolahController::class, 'store']);
     Route::delete('allSekolah/destroy/{id}', [sekolahController::class, 'destroy']);
@@ -49,11 +50,18 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('/json', [SmpController::class, 'getDataSmp'])->name('getDataSmp');
     Route::resource('dp', dataPokokController::class);
     Route::get('/json/getData', [dataPokokController::class, 'getData'])->name('dp.getData');
+    Route::get('/showSma', [ApiAdminController::class, 'showSma']);
+    Route::get('/unlockds/{id}', [ApiAdminController::class, 'unlockds']);
+    Route::get('/unlockns/{id}', [ApiAdminController::class, 'unlockns']);
 
 
     //management user
     Route::get("/genUsers",[adminController::class, 'genUsers']);
     Route::get("/showUser",[adminController::class, 'getuser']);
+
+
+    //management unlock
+    Route::get('/unlock', [adminController::class, 'unlock']);
 
 });
 
@@ -61,6 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
 Route::group(['prefix' => 'op', 'middleware' => ['auth', 'operator']], function(){
     Route::get('siswas', [opSiswaController::class, 'siswas']);
     Route::get('export', [opSiswaController::class, 'export']);
+    Route::get('export2', [opSiswaController::class, 'export2']);
     Route::get('export/smp', [opSiswaController::class, 'exportsmp']);
     Route::get('getSiswa', [opApiController::class, 'getSiswa']);
     Route::get('siswa/import', [opSiswaController::class, 'import']);
@@ -69,5 +78,15 @@ Route::group(['prefix' => 'op', 'middleware' => ['auth', 'operator']], function(
     Route::get('changePass', [opSiswaController::class, 'changePass']);
     Route::post('updatePassword', [opSiswaController::class, 'updatePassword']);
     Route::get('siswa/edit/{id}', [opSiswaController::class, 'getsiswa']);
+    Route::get('getNilai', [opApiController::class, 'getNilai']);
     Route::post('siswa/storenisn', [opSiswaController::class, 'storenisn']);
+    Route::post('siswa/add', [opSiswaController::class, 'add']);
+    Route::delete('siswa/delete/{id}', [opSiswaController::class, 'destroy']);
+    Route::get('siswa/delSis', [opSiswaController::class, 'delSis']);
+    Route::get('finalisasi', [opSiswaController::class, 'finalisasi']);
+    Route::post('agree', [opSiswaController::class, 'agree']);
+    Route::get('fds', [opSiswaController::class, 'fds']);
+    Route::get('fns', [opSiswaController::class, 'fns']);
 });
+
+Route::get('gennilai', [opSiswaController::class, 'genNilai']);

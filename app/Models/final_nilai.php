@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class dataPokok extends Model
+class final_nilai extends Model
 {
     use HasFactory;
 

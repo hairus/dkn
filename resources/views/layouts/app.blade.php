@@ -14,12 +14,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('temp/assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('temp/assets/images/fav.png') }}">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('/temp/assets/extra-libs/multicheck/multicheck.css') }}">
     <link href="{{ asset('temp/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet">
     <link href="{{ asset('temp/dist/css/style.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
+    {{-- select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -139,6 +142,11 @@
     <script src="{{ asset('/temp/assets/extra-libs/multicheck/jquery.multicheck.js') }}"></script>
     <script src="{{ asset('/temp/assets/extra-libs/DataTables/datatables.min.js') }}"></script>
     <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+
+    {{-- select2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- sweatalert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('script')
 
 </body>

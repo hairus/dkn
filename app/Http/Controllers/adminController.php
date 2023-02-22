@@ -40,4 +40,11 @@ class adminController extends Controller
 
         return view('admin.users.index', compact('user'));
     }
+
+    public function unlock()
+    {
+        return view('admin.unlock.index');
+    }
+
+
 }

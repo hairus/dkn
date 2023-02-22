@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\siswaExp;
 use App\Exports\SiswaExport;
+use App\Exports\SiswaExport1;
 use App\Exports\SmpExport;
 use App\Imports\SiswaImport;
 use App\Models\dataPokok;
+use App\Models\final_nilai;
+use App\Models\final_siswa;
 use App\Models\kab_kota;
 use App\Models\mst_smp;
 use App\Models\nilai_siswa;
+use App\Models\siswaFix;
 use App\Models\sma_smk_lengkap;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -37,7 +42,11 @@ class opSiswaController extends Controller
 
     public function import()
     {
-        return view('operator.siswa.import');
+        if (auth()->user()->fns->final == false) {
+            return view('operator.siswa.import');
+        }else{
+            return back();
+        }
     }
 
     public function saveImport(Request $request)
@@ -52,10 +61,15 @@ class opSiswaController extends Controller
 
     public function siswaNilai()
     {
-        $smas = nilai_siswa::where('npsn_sma', auth()->user()->npsn)->get();
-        $sma = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
+        $fns = final_siswa::where('user_id', auth()->user()->id)->first();
+        if ($fns->final == false) {
+            return redirect('/op/finalisasi');
+        } else {
+            $smas = nilai_siswa::with('siswas')->where('npsn_sma', auth()->user()->npsn)->get()->sortByDesc('siswas.nama')->sortBy('siswas.rombel');
+            $sma = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
 
-        return view('operator.siswa.showNilai', compact('sma', 'smas'));
+            return view('operator.siswa.showNilai', compact('sma', 'smas'));
+        }
     }
 
     public function changePass()
@@ -84,9 +98,132 @@ class opSiswaController extends Controller
 
     public function storenisn(Request $request)
     {
+
         $siswas = dataPokok::find($request->id);
         $siswas->nisn = $request->nisn;
         $siswas->rombel = $request->rombel;
         $siswas->save();
+    }
+
+    public function add(Request $request)
+    {
+        // dd(auth()->user()->sma->nm_sekolah);
+        // dd($request);
+        $add = dataPokok::create([
+            "nama" => $request->nama,
+            'tingkat' => $request->tingkat,
+            'npsn_sekolah' => auth()->user()->npsn,
+            'nama_sekolah' => auth()->user()->sma->nm_sekolah,
+            'rombel' => $request->rombel,
+            'asal_sekolah' => "-",
+            'nisn' => $request->nisn,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $dataPokok = dataPokok::find($id);
+        $dataPokok->delete();
+    }
+
+    public function delSis()
+    {
+        // titip dns
+        /**
+         * ns.beonintermedia.com
+
+         *ns.jagoanhosting.com
+
+         *ns.jagoanweb.com
+
+
+         */
+        $true = auth()->user()->fns->final;
+
+        if ($true == false) {
+            $sisfix = siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
+
+            return back()->with('message', 'hapus siswa berhasil');
+        } else {
+
+            return back()->with('message', 'Maaf fitur sudah terkunci');
+        }
+    }
+
+    public function finalisasi()
+    {
+        $sma = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
+        $fds = final_siswa::where('user_id', auth()->user()->id)->first();
+        $fns = final_nilai::where('user_id', auth()->user()->id)->first();
+
+        return view('operator.op.finalisasi', compact('sma', 'fds', 'fns'));
+    }
+
+    public function agree(Request $request)
+    {
+        if ($request->agree == 1) {
+            $user = User::find(auth()->user()->id);
+            $user->update([
+                'edit_status' => 0
+            ]);
+        }
+
+        return back();
+    }
+
+    public function fds()
+    {
+        //cek dulu ada tidak di database
+        $cek = auth()->user()->fds();
+
+        //jika tidak ada maka create
+        if ($cek->count() == 0 || $cek->count() == "") {
+            $user = auth()->user()->fds()->create([
+                "final" => true
+            ]);
+        } else {
+            //jika ada maka cek perubahan karena defaultnya false
+
+            $user = auth()->user()->fds()->update([
+                "final" => true
+            ]);
+        }
+    }
+
+    public function fns()
+    {
+        //cek dulu ada tidak di database
+        $cek = auth()->user()->fns();
+
+        //jika tidak ada maka create
+        if ($cek->count() == 0 || $cek->count() == "") {
+            $user = auth()->user()->fns()->create([
+                "final" => true
+            ]);
+        } else {
+            //jika ada maka cek perubahan karena defaultnya false
+
+            $user = auth()->user()->fns()->update([
+                "final" => true
+            ]);
+        }
+    }
+
+    public function genNilai()
+    {
+        $user = User::all();
+        foreach ($user as $data) {
+            $data->fds()->create([
+                "final" => false
+            ]);
+            $data->fns()->create([
+                "final" => false
+            ]);
+        }
+    }
+
+    public function export2()
+    {
+        return Excel::download(new siswaExp, 'siswa.xlsx');
     }
 }
