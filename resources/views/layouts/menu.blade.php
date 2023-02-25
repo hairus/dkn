@@ -76,7 +76,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>                    
+                    <li class="sidebar-item"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout"
+                            aria-expanded="false"><i class="mdi mdi-power"></i><span
+                                class="hide-menu">Logout</span></a></li>
                 @else
                     <li class="{{ request()->is('/home') ? 'sidebar-item selected' : 'sidebar-item' }}"> <a
                             class="sidebar-link waves-effect waves-dark sidebar-link" href="/home"
@@ -97,7 +101,7 @@
                                 <a class="sidebar-link waves-effect waves-dark sidebar-link"
                                     href="{{ url('/op/siswaNilai') }}" aria-expanded="false">
                                     <i class="mdi mdi-account-check"></i>
-                                    <span class="hide-menu">Nilai</span>
+                                    <span class="hide-menu">Master Nilai</span>
                                 </a>
                             </li>
                             <li class="sidebar-item">
@@ -115,7 +119,11 @@
                                 </a>
                             </li>
                         </ul>
-                    </li>
+                    </li>                    
+                    <li class="sidebar-item"> <a
+                            class="sidebar-link waves-effect waves-dark sidebar-link" href="/logout"
+                            aria-expanded="false"><i class="mdi mdi-power"></i><span
+                                class="hide-menu">Logout</span></a></li>
                 @endif
             </ul>
         </nav>

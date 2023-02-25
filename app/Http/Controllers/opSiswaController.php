@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Exports\siswaExp;
 use App\Exports\SiswaExport;
 use App\Exports\SiswaExport1;
@@ -65,10 +66,22 @@ class opSiswaController extends Controller
         if ($fns->final == false) {
             return redirect('/op/finalisasi');
         } else {
-            $smas = nilai_siswa::with('siswas')->where('npsn_sma', auth()->user()->npsn)->get()->sortByDesc('siswas.nama')->sortBy('siswas.rombel');
+            //$smas = nilai_siswa::with('siswas')->where('npsn_sma', auth()->user()->npsn)->get()->sortByDesc('siswas.nama')->sortBy('siswas.rombel');
+            //anas
+            $smas = DB::table('siswa_fixes')
+            ->leftjoin('nilai_siswas', 'nilai_siswas.siswa_id', '=', 'siswa_fixes.id')// joining the contacts table , where user_id and contact_user_id are same
+            ->leftjoin('mst_smps', 'siswa_fixes.npsn_smp', '=', 'mst_smps.npsn_smp')// joining the contacts table , where user_id and contact_user_id are same
+            ->select('siswa_fixes.*', 'nilai_siswas.rerata', 'mst_smps.nama_smp')
+            ->where('siswa_fixes.npsn_sma', auth()->user()->npsn)
+            ->orderby('siswa_fixes.tingkat', 'asc')
+            ->orderby('siswa_fixes.rombel', 'asc')
+            ->orderby('siswa_fixes.nama', 'asc')
+            ->get();
             $sma = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
-
-            return view('operator.siswa.showNilai', compact('sma', 'smas'));
+            
+            //return view('operator.siswa.showNilai', compact('sma', 'smas'));
+            //anas
+            return view('operator.siswa.showNilai222', compact('sma', 'smas'));
         }
     }
 

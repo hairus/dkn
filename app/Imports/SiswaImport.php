@@ -80,14 +80,14 @@ class SiswaImport implements ToCollection
 
                         'tingkat' => $row[2],
 
-                        'npsn_smp' => $row[5],
+                        'npsn_smp' => trim($row[5]),
 
                         'rombel' => $row[3],
 
                     ])->nilai()->create([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'npsn_smp' => $row[5],
+                        'npsn_smp' => trim($row[5]),
 
                         'rerata' => $row[6],
                     ]);
@@ -104,14 +104,14 @@ class SiswaImport implements ToCollection
 
                         'tingkat' => $row[2],
 
-                        'npsn_smp' => $row[5],
+                        'npsn_smp' => trim($row[5]),
 
                         'rombel' => $row[3],
 
                     ])->nilai()->create([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'npsn_smp' => $row[5],
+                        'npsn_smp' => trim($row[5]),
 
                         'rerata' => $row[6],
                     ]);

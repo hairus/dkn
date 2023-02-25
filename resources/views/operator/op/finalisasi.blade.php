@@ -30,14 +30,15 @@
                             </div>
                             <p>Saya adalah kepala sekolah, dengan ini menyatakan bahwa data yang saya masukkan adalah data
                                 yang benar. Apabila dikemudian hari terdapat kesalahan data maka sepenuhnya menjadi tanggung
-                                jawab saya.
+                                jawab saya. 
                             </p>
+                            <p>Setelah finalisasi, Anda tidak dapat mengubah Data Siswa.</p>
                             @if ($fds)
                                 @if ($fds->final == false)
                                     <button class="btn btn-sm btn-primary" onclick="fds()">Finalisasi Data Siswa</button>
                                 @else
                                     <button class="btn btn-sm btn-primary mb-2" onclick="fds()" disabled>
-                                        Anda telah melakukan finalisasi {{ $fds->updated_at }}
+                                        Anda telah melakukan finalisasi pada {{ $fds->updated_at }}
                                     </button>
                                 @endif
                             @else
@@ -56,6 +57,7 @@
                                 yang benar. Apabila dikemudian hari terdapat kesalahan data maka sepenuhnya menjadi tanggung
                                 jawab saya.
                             </p>
+                            <p>Setelah finalisasi, Anda tidak dapat mengubah Data Nilai.</p>
                             @if ($fds->final == false)
                                 <button class="btn btn-sm btn-primary mb-2" onclick="fns()" disabled>Finalisasi Data
                                     Nilai</button>
@@ -64,7 +66,7 @@
                                     @if ($fns->final == false)
                                         <button class="btn btn-sm btn-primary" onclick="fns()">Finalisasi Data Nilai</button>
                                     @else
-                                        <button class="btn btn-sm btn-primary mb-2" onclick="fns()" disabled>Anda melakukan finalisasi {{ $fns->updated_at }}</button>
+                                        <button class="btn btn-sm btn-primary mb-2" onclick="fns()" disabled>Anda telah melakukan finalisasi pada {{ $fns->updated_at }}</button>
                                     @endif
                                 @else
                                     <button class="btn btn-sm btn-primary" onclick="fns()">Finalisasi Data Nilai</button>
@@ -100,7 +102,8 @@
                                 'success'
                             )
                             setTimeout(() => {
-                                location.reload();
+                                //location.reload();
+                                window.location = "/op/siswaNilai";
                             }, 2000);
                         }
                     })

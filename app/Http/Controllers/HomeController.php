@@ -47,15 +47,63 @@ class HomeController extends Controller
 
                 $siswas = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
 
-                return view('home', compact('siswas', 'sekolah'));
+                $siswa1s = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
+                $siswa2s = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
+
+                //return view('home', compact('siswas', 'sekolah'));
+                return view('home', compact('siswa1s', 'siswa2s', 'sekolah'));
             } else {
 
                 $sekolah = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
 
                 $siswas = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
 
-                return view('home', compact('siswas', 'sekolah'));
+                $siswa1s = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
+                $siswa2s = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
+
+                //return view('home', compact('siswas', 'sekolah'));
+                return view('home', compact('siswa1s', 'siswa2s', 'sekolah'));
             }
+        }
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index2()
+    {
+        if (auth()->user()->roles->role == 1) {
+            $sekolahs = sma_smk_lengkap::get();
+
+            $siswas = siswa::all();
+
+            $kabs = kab_kota::all();
+
+            //$siswa1s = dataPokok::all()->paginate(20)->count();
+            $siswa2s = siswaFix::all()->count();
+            //dd($siswa2s);
+
+            return view('home222', compact('sekolahs', 'siswas', 'kabs', 'siswa2s'));
+
+        } else {
+            $sekolah = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
+
+            $siswas = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
+
+            $siswa1s = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
+            $siswa1s_10 = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->where('tingkat', 'Kelas 10')->get();
+            $siswa1s_11 = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->where('tingkat', 'Kelas 11')->get();
+            $siswa1s_12 = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->where('tingkat', 'Kelas 12')->get();
+
+            $siswa2s = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
+            $siswa2s_10 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 10')->get();
+            $siswa2s_11 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 11')->get();
+            $siswa2s_12 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 12')->get();
+
+            //return view('home', compact('siswas', 'sekolah'));
+            return view('home222', compact('siswa1s', 'siswa1s_10', 'siswa1s_11', 'siswa1s_12', 'siswa2s', 'siswa2s_10', 'siswa2s_11', 'siswa2s_12', 'sekolah'));
         }
     }
 

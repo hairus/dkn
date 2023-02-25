@@ -40,8 +40,15 @@
                     <div class="col-6">
                         <div class="bg-dark p-10 text-white text-center">
                             <i class="fa fa-user mb-1 font-16"></i>
-                            <h5 class="mb-1 mt-1">{{ $siswas->count() }}</h5>
+                            <h5 class="mb-1 mt-1">{{ $siswa1s->count() }}</h5>
                             <small class="font-light">Total Siswa</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-dark p-10 text-white text-center">
+                            <i class="fa fa-user mb-1 font-16"></i>
+                            <h5 class="mb-1 mt-1">{{ $siswa2s->count() }}</h5>
+                            <small class="font-light">Total Nilai</small>
                         </div>
                     </div>
                 </div>

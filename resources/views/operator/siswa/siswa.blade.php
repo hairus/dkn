@@ -27,9 +27,9 @@
                             <span class="fa fa-plus"></span> Tambah Siswa
                         </button>
                         <a href="{{ url('/op/export2') }}">
-                        <button type="button" class="btn btn-sm btn-primary text-white float-end mb-3 ms-2">
-                            <span class="fa fa-plus"></span> Download Siswa
-                        </button>
+                            <button type="button" class="btn btn-sm btn-primary text-white float-end mb-3 ms-2">
+                                <span class="fa fa-plus"></span> Download Siswa
+                            </button>
                         </a>
                     @endif
                     <table class="table table-hover" id="myTable">
@@ -92,9 +92,9 @@
                             <label for="">Tingkat</label>
                             <select name="" id="tingkat" class="form-control" required>
                                 <option value="">---</option>
-                                <option value="kelas 10">Kelas 10</option>
-                                <option value="kelas 11">Kelas 11</option>
-                                <option value="kelas 12">Kelas 12</option>
+                                <option value="Kelas 10">Kelas 10</option>
+                                <option value="Kelas 11">Kelas 11</option>
+                                <option value="Kelas 12">Kelas 12</option>
                             </select>
                         </div>
                     </div>

@@ -61,29 +61,15 @@
                             @foreach ($smas as $key => $data)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $data->siswas->nama }}</td>
-                                    <td>{{ $data->siswas->nisn }}</td>
-                                    <td>{{ $data->siswas->tingkat }}</td>
-                                    <td>{{ $data->siswas->rombel }}</td>
+                                    <td>{{ $data->nama }}</td>
+                                    <td>{{ $data->nisn }}</td>
+                                    <td>{{ $data->tingkat }}</td>
+                                    <td>{{ $data->rombel }}</td>
                                     <td>{{ $data->rerata }}</td>
+                                    <td>{{ $data->npsn_smp }}</td>
                                     <td>
-                                        @if ($data->npsn_smp)
-                                            @if ($data->smps)
-                                                {{ $data->smps->npsn_smp }}
-                                            @else
-                                                {{ $data->npsn_smp }}
-                                            @endif
-                                        @else
-                                            <span class="badge bg-pill bg-danger"> SMP TIDAK DI TEMUKAN</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($data->npsn_smp)
-                                            @if ($data->smps)
-                                                {{ $data->smps->nama_smp }}
-                                            @else
-                                                <span class="badge bg-pill bg-danger">TIDAK ADA DALAM DATABASE</span>
-                                            @endif
+                                        @if ($data->nama_smp)
+                                            {{ $data->nama_smp }}
                                         @else
                                             <span class="badge bg-pill bg-danger">TIDAK ADA DALAM DATABASE</span>
                                         @endif
