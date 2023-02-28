@@ -55,7 +55,7 @@ class SiswaImport implements ToCollection
 
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                    return back()->with('message', 'nisn siswa ada yang kosong');;
+                    return back()->with('message', 'nisn siswa ada yang kosong');
                 }
 
                 //jika npsn smp excel kosong
@@ -65,7 +65,7 @@ class SiswaImport implements ToCollection
 
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                    return back()->with('message', 'NPSN SMP siswa ada yang kosong');;
+                    return back()->with('message', 'NPSN SMP siswa ada yang kosong');
                 }
 
                 if ($siswa > 0) {
@@ -77,7 +77,13 @@ class SiswaImport implements ToCollection
 
                         'nama' => $row[0]
 
-                    ])->delete();
+                    ])->count();
+
+                    if($datas){
+                        siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
+
+                        return back()->with('message', 'Terdeteksi ada siswa kembar (Nama dan NISN identik)');
+                    }
 
                     // lalu insert
 
