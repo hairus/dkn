@@ -6,7 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="aplikasi penilaian sekolah asal">
+    <meta name="keywords"
+        content="Aplikasi, Anisa, Anisa Jatim, Aplikasi Anisa, Aplikasi Anisa Jatim, Aplikasi Nilai Sekolah Asal, Indeks Sekolah Asal">
+    <meta name="description"
+        content="ANISA JATIM - Aplikasi Nilai Sekolah Asal yang dikembangkan oleh UPT TIKP Dinas Pendidikan Provinsi Jawa Timur untuk mendapkan Indeks Sekolah Asal SMP/Sederajat.">
     <meta name="robots" content="noindex,nofollow">
     <title>ANISAJATIM</title>
     <!-- Favicon icon -->

@@ -21,30 +21,38 @@
                         {{ $sma->nm_sekolah }}
                     </div>
                     <hr class="mb-4">
+                    @if ($no_nilai == 0)
+                            <div class="alert alert-danger" role="alert">
+                                Silahkan lengkapi, Data Nilai masih kosong!
+                            </div>
+                    @endif
                     @if (Auth::user()->fns->final == false)
+                    <div class="col-sm-12">
                         <a href="/op/siswa/import">
-                            <button type="button" class="btn btn-sm btn-success text-white float-end mb-3 ms-2">
+                            <button type="button" class="btn btn-sm btn-success text-white mb-3 ms-2">
                                 <span class="fa fa-file"></span> Upload Nilai
                             </button>
                         </a>
                         <a href="{{ url('/op/export') }}">
-                            <button type="button" class="btn btn-sm btn-primary float-end mb-3 ms-2">
+                            <button type="button" class="btn btn-sm btn-primary mb-3 ms-2">
                                 <span class="fa fa-file"></span> Download Tempate
                             </button>
                         </a>
                         <a href="{{ url('/op/export/smp') }}">
-                            <button type="button" class="btn btn-sm btn-default float-end mb-3 ms-2">
+                            <button type="button" class="btn btn-sm btn-default mb-3 ms-2">
                                 <span class="fa fa-file"> </span> Download NPSN SMP
                             </button>
                         </a>
                         <a href="/op/siswa/delSis" id="hap">
                             <button type="button" onclick="hapusSiswa()"
-                                class="btn btn-sm btn-danger text-white float-end mb-3 ms-2">
+                                class="btn btn-sm btn-danger text-white mb-3 ms-2">
                                 <span class="fa fa-file"></span> Hapus Semua Nilai
                             </button>
                         </a>
+                    </div>
                     @endif
-                    <table class="table table-hover" id="myTable">
+                    <div class="table-responsive">
+                    <table id="myTable">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -78,6 +86,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,13 +108,13 @@
             $('#hap').on('click', function(e) {
                 e.preventDefault();
                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
+                    title: 'Yakin Menghapus Data Ini?',
+                    text: "Kamu Tidak Akan Dapat Melihat Data Ini Lagi!",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+                    confirmButtonText: 'Ya, hapus!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
@@ -113,8 +122,8 @@
                             url: "/op/siswa/delSis",
                             success: function() {
                                 Swal.fire(
-                                    'Deleted!',
-                                    'Your students has been deleted.',
+                                    'Dihapus!',
+                                    'Seluruh Data Nilai Berhasil Dihapus!.',
                                     'success'
                                 )
                                 setTimeout(() => {

@@ -24,7 +24,7 @@ class SiswaImport implements ToCollection
         if ($jumDataPokok != $jumlah_excel) {
             siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-            return back()->with('message', 'FORMAT EXCEL TIDAK COCOK');;
+            return back()->with('message', 'PASTIKAN JUDUL KOLOM TELAH DIHAPUS');
         }
 
         foreach ($rows as $row) {
@@ -58,13 +58,24 @@ class SiswaImport implements ToCollection
                     return back()->with('message', 'nisn siswa ada yang kosong');;
                 }
 
+                //jika npsn smp excel kosong
+                // delete data
+
+                if ($row[5] == '' || $row[5] == null) {
+
+                    siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
+
+                    return back()->with('message', 'NPSN SMP siswa ada yang kosong');;
+                }
 
                 if ($siswa > 0) {
                     // jika ada maka di delete
                     $datas = siswaFix::where([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'nisn' => $row[1]
+                        'nisn' => $row[1],
+
+                        'nama' => $row[0]
 
                     ])->delete();
 
@@ -78,7 +89,7 @@ class SiswaImport implements ToCollection
 
                         'nisn' => $row[1],
 
-                        'tingkat' => $row[2],
+                        'tingkat' => ucwords(strtolower(trim($row[2]))),
 
                         'npsn_smp' => trim($row[5]),
 
@@ -102,7 +113,7 @@ class SiswaImport implements ToCollection
 
                         'nisn' => $row[1],
 
-                        'tingkat' => $row[2],
+                        'tingkat' => ucwords(strtolower(trim($row[2]))),
 
                         'npsn_smp' => trim($row[5]),
 

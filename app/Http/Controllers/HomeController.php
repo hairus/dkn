@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\dataPokok;
+use App\Models\final_nilai;
+use App\Models\final_siswa;
 use App\Models\kab_kota;
 use App\Models\siswa;
 use App\Models\siswaFix;
@@ -34,7 +36,7 @@ class HomeController extends Controller
             $sekolahs = sma_smk_lengkap::get();
 
             $siswas = siswa::all();
-
+            
             $kabs = kab_kota::all();
 
             return view('home', compact('sekolahs', 'siswas', 'kabs'));
@@ -57,7 +59,7 @@ class HomeController extends Controller
                 $sekolah = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
 
                 $siswas = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
-
+                
                 $siswa1s = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
                 $siswa2s = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
 
@@ -102,8 +104,12 @@ class HomeController extends Controller
             $siswa2s_11 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 11')->get();
             $siswa2s_12 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 12')->get();
 
+            
+            $fds = final_siswa::where('user_id', auth()->user()->id)->first();
+            $fns = final_nilai::where('user_id', auth()->user()->id)->first();
+
             //return view('home', compact('siswas', 'sekolah'));
-            return view('home222', compact('siswa1s', 'siswa1s_10', 'siswa1s_11', 'siswa1s_12', 'siswa2s', 'siswa2s_10', 'siswa2s_11', 'siswa2s_12', 'sekolah'));
+            return view('home222', compact('siswa1s', 'siswa1s_10', 'siswa1s_11', 'siswa1s_12', 'siswa2s', 'siswa2s_10', 'siswa2s_11', 'siswa2s_12', 'sekolah', 'fds', 'fns'));
         }
     }
 

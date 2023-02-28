@@ -15,24 +15,33 @@
                     <strong>{{ $message }}</strong>
                 </div>
             @endif
+            
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">
                         {{ $sekolah->nm_sekolah }}
                     </div>
                     <hr class="mb-4">
+                    @if ($no_nisn > 0)
+                            <div class="alert alert-danger" role="alert">
+                                Silahkan lengkapi, ada {{ $no_nisn }} peserta didik yang belum memiliki NISN!
+                            </div>
+                    @endif
                     @if (auth()->user()->fds->final == false)
+                    <div class="col-sm-12">
                         <button type="button" onclick="showModal()"
-                            class="btn btn-sm btn-success text-white float-end mb-3 ms-2">
+                            class="btn btn-sm btn-success text-white mb-3 ms-2">
                             <span class="fa fa-plus"></span> Tambah Siswa
                         </button>
                         <a href="{{ url('/op/export2') }}">
-                            <button type="button" class="btn btn-sm btn-primary text-white float-end mb-3 ms-2">
-                                <span class="fa fa-plus"></span> Download Siswa
+                            <button type="button" class="btn btn-sm btn-primary text-white mb-3 ms-2">
+                                <span class="fas fa-download"></span> Download Siswa
                             </button>
                         </a>
+                    </div>
                     @endif
-                    <table class="table table-hover" id="myTable">
+                    <div class="table-responsive">
+                    <table id="myTable">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -46,6 +55,7 @@
                         <tbody>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -85,7 +95,7 @@
                         </div> --}}
                         <div class="form-group">
                             <label for="">Rombel</label>
-                            <input type="text" class="form-control" name="rombela" id="rombel" placeholder="X MIPA 1"
+                            <input type="text" class="form-control" name="rombela" id="rombel" placeholder="Contoh: X MIPA 1"
                                 required>
                         </div>
                         <div class="form-group">
@@ -186,38 +196,39 @@
             var tingkat = $('#tingkat').val();
             if (nisn.length != 10) {
                 alert('NISN HARUS 10 DIGIT');
-            }
-            $.ajax({
-                type: 'post',
-                url: '/op/siswa/add',
-                data: {
-                    nama: nama,
-                    nisn: nisn,
-                    rombel: rombel,
-                    tingkat: tingkat,
-                },
-                success: function(data) {
-                    $('#exampleModaladd').modal('hide');
-                    $('#myTable').DataTable().ajax.reload();
-                    clear();
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 3000,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
+            } else {
+                $.ajax({
+                    type: 'post',
+                    url: '/op/siswa/add',
+                    data: {
+                        nama: nama,
+                        nisn: nisn,
+                        rombel: rombel,
+                        tingkat: tingkat,
+                    },
+                    success: function(data) {
+                        $('#exampleModaladd').modal('hide');
+                        $('#myTable').DataTable().ajax.reload();
+                        clear();
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
 
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Tambah Siswa Berhasil'
-                    })
-                }
-            })
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Tambah Siswa Berhasil'
+                        })
+                    }
+                })
+            }
 
         }
 
@@ -234,13 +245,13 @@
 
         function destroy(id) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Yakin Menghapus Data Ini?',
+                text: "Kamu Tidak Akan Dapat Melihat Data Ini Lagi!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                confirmButtonText: 'Ya, hapus!'
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
@@ -250,7 +261,7 @@
                             $('#myTable').DataTable().ajax.reload();
                             Swal.fire(
                                 'Deleted!',
-                                'Your file has been deleted.',
+                                'Your record has been deleted.',
                                 'success'
                             )
                             const Toast = Swal.mixin({

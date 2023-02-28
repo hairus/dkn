@@ -8,6 +8,7 @@
                     <div class="card-title">
                         SMP/MTS
                     </div>
+                    <div class="table-responsive">
                     <table class="table table-hover" id="users">
                         <thead>
                             <tr>
@@ -28,6 +29,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -8,6 +8,7 @@
                     <div class="card-title">
                         Unlock
                     </div>
+                    <div class="table-responsive">
                     <table class="table table-hover" id="myTable">
                         <thead>
                             <tr>
@@ -20,6 +21,7 @@
                         <tbody>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -76,12 +78,16 @@
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
-                    })
+                    });
 
                     Toast.fire({
                         icon: 'success',
                         title: 'Unlock Data Siswa Berhasil'
-                    })
+                    });
+
+                    setTimeout(function(){
+                        location.reload();
+                    },3000);
                 }
             })
         }
@@ -101,12 +107,16 @@
                             toast.addEventListener('mouseenter', Swal.stopTimer)
                             toast.addEventListener('mouseleave', Swal.resumeTimer)
                         }
-                    })
+                    });
 
                     Toast.fire({
                         icon: 'success',
                         title: 'Unlock Nilai Siswa Berhasil'
-                    })
+                    });
+
+                    setTimeout(function(){
+                        location.reload();
+                    },3000);
                 }
             })
         }

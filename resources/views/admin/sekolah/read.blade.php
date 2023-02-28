@@ -1,3 +1,4 @@
+<div class="table-responsive">
 <table class="table table-hover" id="myTable">
     <thead>
         <tr>
@@ -9,6 +10,7 @@
     <tbody>
     </tbody>
 </table>
+</div>
 <script>
     $(document).ready(function() {
         $('#myTable').DataTable({

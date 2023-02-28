@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class kab_kota extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        "kab_kota"
-    ];
+    protected $guarded = [];
+
+    public function sekolahs()
+    {
+        return $this->hasMany(sma_smk_lengkap::class, 'kab_kota', 'id');
+    }
 }

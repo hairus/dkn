@@ -3,34 +3,42 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            @if ($message = Session::get('message'))
-                <div class="alert alert-danger alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">
                         {{ $sma->nm_sekolah }}
                     </div>
                     <hr class="mb-4">
+                    @if ($message = Session::get('message'))
+                        <div class="alert alert-danger alert-block">
+                            <button type="button" class="close" data-dismiss="alert">×</button>
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success alert-block">
+                            <strong>{{ $message }}</strong>
+                        </div>
+                    @endif
                     <form action="{{ url('/op/updatePassword') }}" method="post" id="form">
                         @csrf
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1" onclick="test()">
-                                    <i class="mdi mdi-account-check"></i>
-                                </span>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <div class="col-md-8">
+                                <input type="password" id="password" class="form-control" name="password" required>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
-                            <input type="password" id="password" class="form-control" placeholder="password minimal 8"
-                                aria-label="Username" name="password" aria-describedby="basic-addon1" maxlength="10"
-                                minlength="8">
+                        </div>
+                        <div class="form-group row">
+                            <label for="confirm_password" class="col-md-4 col-form-label text-md-right">Ulangi Password</label>
+                            <div class="col-md-8">
+                                <input type="password" id="password" class="form-control" name="confirm_password" required>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('confirm_password') }}</span>
+                                @endif
+                            </div>
                         </div>
                         <button class="btn btn-primary" type="submit">Update</button>
                     </form>
@@ -40,10 +48,4 @@
     </div>
 @endsection
 @section('script')
-    <script>
-        function test() {
-            var password = $('#password').val();
-            alert(password);
-        }
-    </script>
 @endsection

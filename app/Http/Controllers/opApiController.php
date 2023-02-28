@@ -19,9 +19,9 @@ class opApiController extends Controller
         $cek = siswaFix::where('npsn_sma', auth()->user()->npsn)->count();
 
         if ($cek > 0) {
-            $model = siswaFix::where(function ($query) use ($sma) {
-                $query->where('npsn_sma', $sma->npsn);
-            });
+            $model = dataPokok::where(function ($query) use ($sma) {
+                    $query->where('npsn_sekolah', $sma->npsn);
+                });
 
             return DataTables::eloquent($model)
                 ->addIndexColumn()

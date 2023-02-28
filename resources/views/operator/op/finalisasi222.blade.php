@@ -51,7 +51,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                Finalisasi Nilai
+                                Finalisasi Data Nilai
                             </div>
                             <p>Saya adalah kepala sekolah, dengan ini menyatakan bahwa data yang saya masukkan adalah data
                                 yang benar. Apabila dikemudian hari terdapat kesalahan data maka sepenuhnya menjadi tanggung
@@ -82,61 +82,85 @@
 @section('script')
     <script>
         function fds() {
-            Swal.fire({
-                title: 'Apakah anda yakin finalisasi data siswa?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Setuju',
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
+            swal.fire({
+                title: "Apakah Anda yakin untuk Finalisasi Data Siswa?",
+                icon: 'question',
+                text: "Silahkan pastikan dan konfirmasi!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Setuju",
+                cancelButtonText: "Batal"
+            }).then(function (e) {
+
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
                     $.ajax({
-                        type: 'get',
-                        url: "/op/fds",
-                        success: function() {
-                            Swal.fire(
-                                'Sukses!',
-                                'Finalisasi Data Siswa Berhasil.',
-                                'success'
-                            )
-                            setTimeout(() => {
-                                //location.reload();
-                                window.location = "{{ url('/op/siswaNilai') }}";
-                            }, 2000);
+                        type: 'POST',
+                        url: "{{url('/op/final-siswa')}}",
+                        data: {_token: CSRF_TOKEN},
+                        dataType: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal.fire("Done!", results.message, "success");
+                                // refresh page after 2 seconds
+                                setTimeout(function(){
+                                    //location.reload();
+                                    window.location = "{{ url('/op/siswaNilai') }}";
+                                },2000);
+                            } else {
+                                swal.fire("Error!", results.message, "error");
+                            }
                         }
-                    })
+                    });
+
+                } else {
+                    e.dismiss;
                 }
+
+            }, function (dismiss) {
+                return false;
             })
         }
 
         function fns() {
-            Swal.fire({
-                title: 'Apakah anda yakin finalisasi data nilai?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Setuju',
-                cancelButtonText: "Batal",
-            }).then((result) => {
-                if (result.isConfirmed) {
+            swal.fire({
+                title: "Apakah Anda yakin untuk Finalisasi Data Nilai?",
+                icon: 'question',
+                text: "Silahkan pastikan dan konfirmasi!",
+                type: "warning",
+                showCancelButton: !0,
+                confirmButtonText: "Setuju",
+                cancelButtonText: "Batal"
+            }).then(function (e) {
+
+                if (e.value === true) {
+                    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+
                     $.ajax({
-                        type: 'get',
-                        url: "/op/fns",
-                        success: function() {
-                            Swal.fire(
-                                'Sukses!',
-                                'Finalisasi Data Nilai Berhasil.',
-                                'success'
-                            )
-                            setTimeout(() => {
-                                location.reload();
-                            }, 2000);
+                        type: 'POST',
+                        url: "{{url('/op/final-nilai')}}",
+                        data: {_token: CSRF_TOKEN},
+                        dataType: 'JSON',
+                        success: function (results) {
+                            if (results.success === true) {
+                                swal.fire("Done!", results.message, "success");
+                                // refresh page after 2 seconds
+                                setTimeout(function(){
+                                    location.reload();
+                                },2000);
+                            } else {
+                                swal.fire("Error!", results.message, "error");
+                            }
                         }
-                    })
+                    });
+
+                } else {
+                    e.dismiss;
                 }
+
+            }, function (dismiss) {
+                return false;
             })
         }
     </script>

@@ -19,4 +19,14 @@ class sma_smk_lengkap extends Model
     {
         return $this->hasMany(dataPokok::class, 'npsn_sekolah', 'npsn');
     }
+
+    public function siswafix()
+    {
+        return $this->hasMany(siswaFix::class,'npsn_sma', 'npsn');
+    }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'npsn', 'npsn');
+    }
 }

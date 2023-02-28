@@ -8,9 +8,9 @@
                     <div class="card-title">
                         SEKOLAH SMA / SMK
                     </div>
-                    <button type="button" class="btn btn-sm btn-primary float-end mb-3" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-sm btn-primary mb-3" data-bs-toggle="modal"
                         data-bs-target="#exampleModal">
-                        <span class="fa fa-plus"></span>
+                        <span class="fa fa-plus">Tambah Baru</span>
                     </button>
                     <div id="read"></div>
                 </div>

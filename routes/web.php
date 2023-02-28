@@ -32,7 +32,7 @@ Auth::routes();
 // Auth::routes(['register' => false]);
 Route::get('/logout', [HomeController::class, 'logout']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index2'])->name('home');
 // role admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
     Route::get('allSekolah', [sekolahController::class, 'index']);
@@ -63,6 +63,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     //management unlock
     Route::get('/unlock', [adminController::class, 'unlock']);
 
+    //management monitoring
+    Route::get('monitoring', [adminController::class, 'monitoring']);
+    Route::get('monitoring/show', [adminController::class, 'showMon']);
+    Route::get('monitoring/detail/{id}', [adminController::class, 'showDet']);
+
 });
 
 //role operator
@@ -83,10 +88,12 @@ Route::group(['prefix' => 'op', 'middleware' => ['auth', 'operator']], function(
     Route::post('siswa/add', [opSiswaController::class, 'add']);
     Route::delete('siswa/delete/{id}', [opSiswaController::class, 'destroy']);
     Route::get('siswa/delSis', [opSiswaController::class, 'delSis']);
-    Route::get('finalisasi', [opSiswaController::class, 'finalisasi']);
+    Route::get('finalisasi', [opSiswaController::class, 'finalisasi2']);
+    Route::post('final-siswa', [opSiswaController::class, 'final_data_siswa']);
+    Route::post('final-nilai', [opSiswaController::class, 'final_data_nilai']);
     Route::post('agree', [opSiswaController::class, 'agree']);
-    Route::get('fds', [opSiswaController::class, 'fds']);
-    Route::get('fns', [opSiswaController::class, 'fns']);
+    //Route::get('fds', [opSiswaController::class, 'fds']);
+    //Route::get('fns', [opSiswaController::class, 'fns']);
 });
 
-Route::get('gennilai', [opSiswaController::class, 'genNilai']);
+Route::get('ceks', [opSiswaController::class, 'ceks']);

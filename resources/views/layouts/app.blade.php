@@ -7,9 +7,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords"
-        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template">
+        content="Aplikasi, Anisa, Anisa Jatim, Aplikasi Anisa, Aplikasi Anisa Jatim, Aplikasi Nilai Sekolah Asal, Indeks Sekolah Asal">
     <meta name="description"
-        content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+        content="ANISA JATIM - Aplikasi Nilai Sekolah Asal yang dikembangkan oleh UPT TIKP Dinas Pendidikan Provinsi Jawa Timur untuk mendapkan Indeks Sekolah Asal SMP/Sederajat.">
     <meta name="robots" content="noindex,nofollow">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
