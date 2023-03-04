@@ -87,6 +87,13 @@
                         </tbody>
                     </table>
                     </div>
+                    <div class="alert alert-warning" role="alert">
+                        Catatan: 
+                        <ol>
+                            <li>Nilai yang dimasukkan ke dalam sistem adalah nilai <b>Peserta Didik Aktif</b> yang pernah memiliki riwayat nilai di SMA/SMK Negeri di Jawa Timur</li>
+                            <li>Apabila peserta didik berasal dari SMP/MTs Luar Jatim atau berasal dari PKBM, maka pada kolom keterangan pada tabel di atas akan dimunculkan kalimat <b>TIDAK ADA DALAM DATABASE</b> dan <b>NILAI TETAP MASUK DALAM SISTEM</b>.</li>
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>

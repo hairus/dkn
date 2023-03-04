@@ -109,6 +109,8 @@ class opSiswaController extends Controller
             'password_real' => $request->password
         ]);
 
+        Auth::logoutOtherDevices($request->password);
+
         return back()->with('success', 'Password berhasil diubah!');
     }
 
@@ -133,7 +135,7 @@ class opSiswaController extends Controller
         // dd(auth()->user()->sma->nm_sekolah);
         // dd($request);
         $add = dataPokok::create([
-            "nama" => $request->nama,
+            "nama" => strtoupper(trim($request->nama)),
             'tingkat' => $request->tingkat,
             'npsn_sekolah' => auth()->user()->npsn,
             'nama_sekolah' => auth()->user()->sma->nm_sekolah,

@@ -36,7 +36,7 @@ class HomeController extends Controller
             $sekolahs = sma_smk_lengkap::get();
 
             $siswas = siswa::all();
-            
+
             $kabs = kab_kota::all();
 
             return view('home', compact('sekolahs', 'siswas', 'kabs'));
@@ -59,7 +59,7 @@ class HomeController extends Controller
                 $sekolah = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
 
                 $siswas = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
-                
+
                 $siswa1s = dataPokok::where('npsn_sekolah', auth()->user()->npsn)->get();
                 $siswa2s = siswaFix::where('npsn_sma', auth()->user()->npsn)->get();
 
@@ -79,15 +79,16 @@ class HomeController extends Controller
         if (auth()->user()->roles->role == 1) {
             $sekolahs = sma_smk_lengkap::get();
 
-            $siswas = siswa::all();
+            $siswas = siswaFix::count();
+            $dp = dataPokok::count();
 
             $kabs = kab_kota::all();
 
             //$siswa1s = dataPokok::all()->paginate(20)->count();
-            $siswa2s = siswaFix::all()->count();
+            // $siswa2s = siswaFix::limit(10)->get()->count();
             //dd($siswa2s);
 
-            return view('home222', compact('sekolahs', 'siswas', 'kabs', 'siswa2s'));
+            return view('home222', compact('sekolahs', 'siswas', 'kabs', 'dp'));
 
         } else {
             $sekolah = sma_smk_lengkap::where('npsn', auth()->user()->npsn)->first();
@@ -104,7 +105,7 @@ class HomeController extends Controller
             $siswa2s_11 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 11')->get();
             $siswa2s_12 = siswaFix::where('npsn_sma', auth()->user()->npsn)->where('tingkat', 'Kelas 12')->get();
 
-            
+
             $fds = final_siswa::where('user_id', auth()->user()->id)->first();
             $fns = final_nilai::where('user_id', auth()->user()->id)->first();
 

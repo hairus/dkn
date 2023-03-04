@@ -53,7 +53,7 @@ class adminController extends Controller
     {
         $kabs = kab_kota::with(['sekolahs' => function($q){
             $q->with('siswafix');
-        }])->get();
+        }])->limit(10)->get();
 
         $kabs = kab_kota::all();
 

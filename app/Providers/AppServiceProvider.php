@@ -24,6 +24,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        URL::forceScheme('https');
+        //modif anas
+        $root_url=URL::to('/');
+        if($root_url <> 'http://anisa-jatim.test')
+             URL::forceScheme('https');
     }
 }
