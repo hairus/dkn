@@ -2,27 +2,22 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-12">
-            @if ($message = Session::get('message'))
-                <div class="alert alert-danger alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
-            @if ($message = Session::get('success'))
-                <div class="alert alert-success alert-block">
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-                    <strong>{{ $message }}</strong>
-                </div>
-            @endif
-            
+        <div class="col-md-12">            
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">
                         {{ $sekolah->nm_sekolah }}
                     </div>
                     <hr class="mb-4">
-                    @if ($no_nisn > 0)
+                    @if ($message = Session::get('message'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                    @elseif ($message = Session::get('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ $message }}
+                            </div>
+                    @elseif ($no_nisn > 0)
                             <div class="alert alert-danger" role="alert">
                                 Silahkan lengkapi, ada {{ $no_nisn }} peserta didik yang belum memiliki NISN!
                             </div>

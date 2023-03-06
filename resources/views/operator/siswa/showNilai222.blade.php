@@ -3,25 +3,21 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <div class="card">
-                @if ($message = Session::get('message'))
-                    <div class="alert alert-danger alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-success alert-block">
-                        <button type="button" class="close" data-dismiss="alert">×</button>
-                        <strong>{{ $message }}</strong>
-                    </div>
-                @endif
+            <div class="card">                
                 <div class="card-body">
                     <div class="card-title">
                         {{ $sma->nm_sekolah }}
                     </div>
-                    <hr class="mb-4">
-                    @if ($no_nilai == 0)
+                    <hr class="mb-4">                   
+                    @if ($message = Session::get('message'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $message }}
+                            </div>
+                    @elseif ($message = Session::get('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ $message }}
+                            </div>
+                    @elseif ($no_nilai == 0)
                             <div class="alert alert-danger" role="alert">
                                 Silahkan lengkapi, Data Nilai masih kosong!
                             </div>

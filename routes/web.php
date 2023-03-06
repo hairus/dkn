@@ -4,6 +4,7 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\ApiAdminController;
 use App\Http\Controllers\dataPokok;
 use App\Http\Controllers\dataPokokController;
+use App\Http\Controllers\DeadlineController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\opApiController;
 use App\Http\Controllers\opSiswaController;
@@ -68,6 +69,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
     Route::get('monitoring/show', [adminController::class, 'showMon']);
     Route::get('monitoring/detail/{id}', [adminController::class, 'showDet']);
 
+
+    //management deadline
+    Route::get('deadline', [DeadlineController::class, 'index']);
+    Route::get('addDead', [DeadlineController::class, 'addDead']);
+    Route::post('saveDead', [DeadlineController::class, 'saveDead']);
+    Route::get('delDead/{id}', [DeadlineController::class, 'delDead']);
 });
 
 //role operator

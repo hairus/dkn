@@ -25,7 +25,7 @@ class SiswaImport implements ToCollection
             
             siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-            return back()->with('message', 'PASTIKAN JUDUL KOLOM (BARIS PERTAMA) TELAH DIHAPUS');
+            return back()->with('message', 'PASTIKAN JUDUL KOLOM (BARIS PERTAMA) TELAH DIHAPUS DAN JUMLAH DATA YANG DIINPUT SAMA DENGAN JUMLAH DATA SISWA');
         }
 
         foreach ($rows as $row) {
@@ -58,7 +58,9 @@ class SiswaImport implements ToCollection
                 //jika nisn excel kosong
                 // delete data
 
-                if ($row[1] == '' || $row[1] == null || strlen($row[1]) <> 10) {
+                $cek_nisn = preg_match("/^\d{10}$/", $row[1]);
+
+                if ($row[1] == '' || $row[1] == null || strlen($row[1]) <> 10 || $cek_nisn === false) {
 
                     $nama = strtoupper(trim($row[0]));
 
@@ -70,7 +72,9 @@ class SiswaImport implements ToCollection
                 //jika npsn smp excel kosong
                 // delete data
 
-                if ($row[5] == '' || $row[5] == null || strlen($row[5]) <> 8) {
+                $cek_npsn_smp = preg_match("/^([A-Z]\d{7}|\d{8})$/", $row[5]);
+
+                if ($row[5] == '' || $row[5] == null || strlen($row[5]) <> 8 || $cek_npsn_smp === false) {
 
                     $nama = strtoupper(trim($row[0]));
 
@@ -108,14 +112,14 @@ class SiswaImport implements ToCollection
 
                         'tingkat' => ucwords(strtolower(trim($row[2]))),
 
-                        'npsn_smp' => trim($row[5]),
+                        'npsn_smp' => trim(strtoupper($row[5])),
 
                         'rombel' => $row[3],
 
                     ])->nilai()->create([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'npsn_smp' => trim($row[5]),
+                        'npsn_smp' => trim(strtoupper($row[5])),
 
                         'rerata' => $row[6],
                     ]);
@@ -132,14 +136,14 @@ class SiswaImport implements ToCollection
 
                         'tingkat' => ucwords(strtolower(trim($row[2]))),
 
-                        'npsn_smp' => trim($row[5]),
+                        'npsn_smp' => trim(strtoupper($row[5])),
 
                         'rombel' => $row[3],
 
                     ])->nilai()->create([
                         'npsn_sma' => auth()->user()->npsn,
 
-                        'npsn_smp' => trim($row[5]),
+                        'npsn_smp' => trim(strtoupper($row[5])),
 
                         'rerata' => $row[6],
                     ]);

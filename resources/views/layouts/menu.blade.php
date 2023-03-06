@@ -34,6 +34,13 @@
                                     <span class="hide-menu">Akun Login Sekolah</span>
                                 </a>
                             </li>
+                            <li class="sidebar-item">
+                                <a class="sidebar-link waves-effect waves-dark sidebar-link"
+                                    href="{{ url('/admin/deadline') }}" aria-expanded="false">
+                                    <i class="fa fa-calendar"></i>
+                                    <span class="hide-menu">Batas Akhir Pengisian</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"

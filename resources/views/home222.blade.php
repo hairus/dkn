@@ -1,5 +1,40 @@
 @extends('layouts.app')
 
+@section('css')
+@if (auth()->user()->roles->role == 1)
+@else
+<style>
+#timer {
+    font-size: 3em;
+    font-weight: 100;
+    color: white;
+    padding: 20px;
+    width: 700px;
+    color: white;
+    
+}
+
+#timer div {
+    display: inline-block;
+    min-width: 90px;
+    padding: 15px;
+    background: #020b43;
+    border-radius: 10px;
+    border: 2px solid #030d52;
+    margin: 15px;
+}
+
+#timer div span {
+    color: #ffffff;
+    display: block;
+    margin-top: 15px;
+    font-size: .35em;
+    font-weight: 400;
+}
+</style>
+@endif
+@endsection
+
 @section('content')
     <div class="card">
         @if (auth()->user()->roles->role == 1)
@@ -169,6 +204,12 @@
                     </table>
                 </div>
             </div>
+            <div class="card-body col-md-12">
+                    <div style="text-align: center;display: flex;justify-content: center;">
+                        <div id="timer"></div>
+                    </div>
+                    <div class="card-title"><center>Deadline: {{ $dln->deadline }}</center></div>  
+            </div>
             <!-- <div class="card-body col-md-12">
                     <h4>Data Nilai<h4>
                     <div class="row">
@@ -204,4 +245,51 @@
             </div> -->
         @endif
     </div>
+@endsection
+
+@section('script')
+@if (auth()->user()->roles->role == 1)
+@else
+<script type="text/javascript">
+function updateTimer() {
+    future = Date.parse("{{ $dln->deadline }}");
+    now = new Date();
+    diff = future - now;
+
+    days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    hours = Math.floor(diff / (1000 * 60 * 60));
+    mins = Math.floor(diff / (1000 * 60));
+    secs = Math.floor(diff / 1000);
+
+    d = days;
+    h = hours - days * 24;
+    m = mins - hours * 60;
+    s = secs - mins * 60;
+
+    if(d < 10){d = "0" + d;}
+    if(h < 10){h = "0" + h;}
+    if(m < 10){m = "0" + m;}
+    if(s < 10){s = "0" + s;}
+
+    // If the count down is over, write some text 
+    if (diff >= 0) {
+        d = days;
+        h = hours - days * 24;
+        m = mins - hours * 60;
+        s = secs - mins * 60;
+    } else {
+        clearInterval();
+        d = h = m = s = 0;
+    }
+    
+    document.getElementById("timer")
+            .innerHTML =
+            '<div>' + d + '<span>Hari</span></div>' +
+            '<div>' + h + '<span>Jam</span></div>' +
+            '<div>' + m + '<span>Menit</span></div>' +
+            '<div>' + s + '<span>Detik</span></div>';
+}
+setInterval('updateTimer()', 1000);
+</script>
+@endif
 @endsection

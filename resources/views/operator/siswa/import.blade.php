@@ -9,7 +9,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="">Upload Siswa OP</label>
-                        <input type="file" name="file" class="form-control">
+                        <input type="file" name="file" class="form-control" required>
                     </div>
                     <button class="btn btn-primary">Upload</button>
                 </form>

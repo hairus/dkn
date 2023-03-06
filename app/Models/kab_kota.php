@@ -14,4 +14,9 @@ class kab_kota extends Model
     {
         return $this->hasMany(sma_smk_lengkap::class, 'kab_kota', 'id');
     }
+
+    public function deadline_kab_kota()
+    {
+        return $this->hasOne(deadline_kab_kota::class, 'kab_kota', 'id');
+    }
 }
