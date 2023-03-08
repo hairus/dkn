@@ -16,7 +16,7 @@ class adminController extends Controller
     public $timeout = 0;
     public function genUsers()
     {
-        set_time_limit(300);
+        set_time_limit(400);
         $sma = sma_smk_lengkap::all();
 
         $jum = $sma->count();
@@ -51,9 +51,7 @@ class adminController extends Controller
 
     public function monitoring()
     {
-        $kabs = kab_kota::with(['sekolahs' => function($q){
-            $q->with('siswafix');
-        }])->limit(10)->get();
+        //$kabs = kab_kota::with(['sekolahs' => function($q){$q->with('siswafix');}])->limit(10)->get();
 
         $kabs = kab_kota::all();
 
@@ -73,7 +71,14 @@ class adminController extends Controller
             ->count();
         }
 
-        return view('admin.monitoring.index',compact('kabs', 'gg', 'gg1'));
+        $gg2 = [];
+        for($i=1;$i<=38;$i++){
+            $gg2[$i] = DB::table('sma_smk_lengkaps')
+            ->where('kab_kota',$i)
+            ->count();
+        }
+
+        return view('admin.monitoring.index',compact('kabs', 'gg', 'gg1', 'gg2'));
     }
 
     public function showMon()

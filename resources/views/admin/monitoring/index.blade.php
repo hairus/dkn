@@ -28,7 +28,7 @@
                                         </a>
                                     </td>
                                     <td>
-                                        {{ $kab->sekolahs->count() }}
+                                        {{ $gg2[$kab->id] }} 
                                     </td>
                                     <td>
                                         {{ $gg[$kab->id] }}

@@ -25,7 +25,8 @@ class SiswaImport implements ToCollection
             
             siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-            return back()->with('message', 'PASTIKAN JUDUL KOLOM (BARIS PERTAMA) TELAH DIHAPUS DAN JUMLAH DATA YANG DIINPUT SAMA DENGAN JUMLAH DATA SISWA');
+            //return back()->with('message', 'PASTIKAN JUDUL KOLOM (BARIS PERTAMA) TELAH DIHAPUS DAN JUMLAH DATA YANG DIINPUT SAMA DENGAN JUMLAH DATA SISWA');
+            return redirect('/op/siswaNilai')->with('message', 'PASTIKAN JUDUL KOLOM (BARIS PERTAMA) TELAH DIHAPUS DAN JUMLAH DATA YANG DIINPUT SAMA DENGAN JUMLAH DATA SISWA');
         }
 
         foreach ($rows as $row) {
@@ -52,7 +53,8 @@ class SiswaImport implements ToCollection
                     
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                    return back()->with('message', 'Rentang nilai dari '.$nama.' salah');
+                    //return back()->with('message', 'Rentang nilai dari '.$nama.' salah');
+                    return redirect('/op/siswaNilai')->with('message', 'Rentang nilai dari '.$nama.' salah');
                 }
 
                 //jika nisn excel kosong
@@ -60,13 +62,14 @@ class SiswaImport implements ToCollection
 
                 $cek_nisn = preg_match("/^\d{10}$/", $row[1]);
 
-                if ($row[1] == '' || $row[1] == null || strlen($row[1]) <> 10 || $cek_nisn === false) {
+                if ( $cek_nisn === false) {
 
                     $nama = strtoupper(trim($row[0]));
 
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                    return back()->with('message', 'NISN dari '.$nama.' salah');
+                    //return back()->with('message', 'NISN dari '.$nama.' salah');
+                    return redirect('/op/siswaNilai')->with('message', 'NISN dari '.$nama.' salah');
                 }
 
                 //jika npsn smp excel kosong
@@ -74,13 +77,14 @@ class SiswaImport implements ToCollection
 
                 $cek_npsn_smp = preg_match("/^([A-Z]\d{7}|\d{8})$/", $row[5]);
 
-                if ($row[5] == '' || $row[5] == null || strlen($row[5]) <> 8 || $cek_npsn_smp === false) {
+                if ( $cek_npsn_smp === false) {
 
                     $nama = strtoupper(trim($row[0]));
 
                     siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                    return back()->with('message', 'NPSN SMP dari '.$nama.' salah');
+                    //return back()->with('message', 'NPSN SMP dari '.$nama.' salah');
+                    return redirect('/op/siswaNilai')->with('message', 'NPSN SMP dari '.$nama.' salah');
                 }
 
                 if ($siswa > 0) {
@@ -97,7 +101,8 @@ class SiswaImport implements ToCollection
                     if($datas){
                         siswaFix::where('npsn_sma', auth()->user()->npsn)->delete();
 
-                        return back()->with('message', 'Terdeteksi ada siswa kembar (Nama dan NISN identik)');
+                        //return back()->with('message', 'Terdeteksi ada siswa kembar (Nama dan NISN identik)');
+                        return redirect('/op/siswaNilai')->with('message', 'Terdeteksi ada siswa kembar (Nama dan NISN identik)');
                     }
 
                     // lalu insert
@@ -149,7 +154,8 @@ class SiswaImport implements ToCollection
                     ]);
                 }
             } else {
-                return back()->with('message', 'silakan cek kembali kelengkapan siswa seperti nisn, npsn masih kosong');
+                //return back()->with('message', 'silakan cek kembali kelengkapan siswa seperti nisn, npsn masih kosong');
+                return redirect('/op/siswaNilai')->with('message', 'silakan cek kembali kelengkapan siswa seperti nisn, npsn masih kosong');
             }
         }
     }
